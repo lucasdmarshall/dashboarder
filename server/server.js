@@ -20,32 +20,12 @@ console.log('Attempting to connect with URI:', MONGO_URI);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const allowedOrigins = [
-  'https://glowing-tulumba-c356a6.netlify.app',
-  'http://localhost:5173',
-  'http://localhost:3000'
-];
-
-const corsOptions = {
-  origin: function(origin, callback) {
-    // allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
+app.use(cors({
+  origin: 'https://glowing-tulumba-c356a6.netlify.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-};
-
-// Handle OPTIONS preflight requests
-app.options('*', corsOptions);
-
-// Apply CORS middleware
-app.use(cors(corsOptions));
+}));
 
 // Root route
 app.get('/', (req, res) => {
