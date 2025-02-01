@@ -12,7 +12,7 @@ const studentCourseProgressRoutes = require("./routes/student-routes/course-prog
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
 
 // Middleware
 app.use(express.json());
