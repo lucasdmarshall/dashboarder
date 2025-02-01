@@ -24,6 +24,11 @@ app.use(cors({
   credentials: true
 }));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to Dashboarder API' });
+});
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/media", mediaRoutes);
@@ -34,10 +39,11 @@ app.use("/api/student/course-progress", studentCourseProgressRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: err.message || "Something went wrong!",
+  console.error('Error:', err);
+  res.status(500).json({ 
+    success: false, 
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
 });
 
