@@ -12,7 +12,9 @@ const studentCourseProgressRoutes = require("./routes/student-routes/course-prog
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/trheinlms';
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/trheinlms';
+
+console.log('Attempting to connect with URI:', MONGO_URI);
 
 // Middleware
 app.use(express.json());
@@ -39,22 +41,18 @@ app.use((err, req, res, next) => {
   });
 });
 
-// MongoDB Connection with better error handling
+// MongoDB Connection
 const connectDB = async () => {
   try {
-    console.log('Connecting to MongoDB with URI:', MONGO_URI);
-    const conn = await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    await mongoose.connect(MONGO_URI, {});
+    console.log('MongoDB Connected:', mongoose.connection.host);
     
     // Start server only after successful DB connection
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error('MongoDB Connection Error:', error.message);
     process.exit(1);
   }
 };
