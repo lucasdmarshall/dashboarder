@@ -12,13 +12,13 @@ const studentCourseProgressRoutes = require("./routes/student-routes/course-prog
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/trheinlms';
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: true,
+  origin: ['https://rococo-seahorse-fff11d.netlify.app', 'http://localhost:5173'],
   credentials: true
 }));
 
