@@ -1,14 +1,23 @@
 import axiosInstance from "@/api/axiosInstance";
 
 export async function registerService(formData) {
-  const { data } = await axiosInstance.post("/auth/register", {
+  console.log('Registration formData:', formData);
+  const requestData = {
     userName: formData.userName,
     userEmail: formData.userEmail,
     password: formData.password,
     role: formData.role || "student"
-  });
-
-  return data;
+  };
+  console.log('Sending registration data:', requestData);
+  
+  try {
+    const { data } = await axiosInstance.post("/auth/register", requestData);
+    console.log('Registration response:', data);
+    return data;
+  } catch (error) {
+    console.error('Registration error:', error.response?.data || error);
+    throw error;
+  }
 }
 
 export async function loginService(formData) {

@@ -28,15 +28,19 @@ function AuthPage() {
               value={searchParams.get("tab") === "signin" ? signInFormData[name] : signUpFormData[name]}
               onChange={(e) => {
                 if (searchParams.get("tab") === "signin") {
-                  setSignInFormData({
+                  const newData = {
                     ...signInFormData,
                     [name]: e.target.value,
-                  });
+                  };
+                  console.log('Updating signin form:', newData);
+                  setSignInFormData(newData);
                 } else {
-                  setSignUpFormData({
+                  const newData = {
                     ...signUpFormData,
                     [name]: e.target.value,
-                  });
+                  };
+                  console.log('Updating signup form:', newData);
+                  setSignUpFormData(newData);
                 }
               }}
             />
@@ -49,10 +53,12 @@ function AuthPage() {
             <Select
               value={signUpFormData[name]}
               onValueChange={(value) => {
-                setSignUpFormData({
+                const newData = {
                   ...signUpFormData,
                   [name]: value,
-                });
+                };
+                console.log('Updating signup form role:', newData);
+                setSignUpFormData(newData);
               }}
             >
               <SelectTrigger>
