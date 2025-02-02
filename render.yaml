@@ -22,4 +22,6 @@ services:
         sync: false
       - key: JWT_SECRET
         sync: false
+      - key: CORS_ORIGIN
+        value: https://dashboarder-frontend-se4z.onrender.com
     plan: free
