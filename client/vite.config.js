@@ -5,7 +5,6 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/MERN-LMS-2024-master/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -14,9 +13,5 @@ export default defineConfig({
   server: {
     port: 3002,
     host: true
-  },
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets'
   }
 })
