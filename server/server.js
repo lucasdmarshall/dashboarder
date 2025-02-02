@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 app.use((req, res, next) => {
   const allowedOrigins = [
-    'https://enchanting-travesseiro-6e8c26.netlify.app',
+    'https://lucasdmarshall.github.io',
     'http://localhost:3002'
   ];
   const origin = req.headers.origin;
