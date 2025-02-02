@@ -2,6 +2,13 @@ import axiosInstance from "@/api/axiosInstance";
 
 export async function registerService(formData) {
   console.log('Registration formData:', formData);
+  
+  // Validate required fields
+  if (!formData.userName || !formData.userEmail || !formData.password) {
+    console.error('Missing required fields:', formData);
+    throw new Error('Username, email, and password are required');
+  }
+  
   const requestData = {
     userName: formData.userName,
     userEmail: formData.userEmail,
@@ -11,8 +18,22 @@ export async function registerService(formData) {
   console.log('Sending registration data:', requestData);
   
   try {
-    const { data } = await axiosInstance.post("/auth/register", requestData);
+    // Send data in the same format as the working curl command
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData)
+    });
+    
+    const data = await response.json();
     console.log('Registration response:', data);
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Registration failed');
+    }
+    
     return data;
   } catch (error) {
     console.error('Registration error:', error.response?.data || error);
