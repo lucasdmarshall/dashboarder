@@ -20,6 +20,15 @@ console.log('Attempting to connect with URI:', MONGO_URI);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Log request bodies
+app.use((req, res, next) => {
+  if (req.method === 'POST') {
+    console.log('Request URL:', req.url);
+    console.log('Request Body:', req.body);
+  }
+  next();
+});
+
 // CORS configuration
 const allowedOrigins = [process.env.CORS_ORIGIN, 'http://localhost:3002'].filter(Boolean);
 
