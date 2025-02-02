@@ -3,33 +3,56 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
-  const { userName, userEmail, password, role } = req.body;
+  try {
+    console.log('Registration request body:', req.body);
+    const { userName, userEmail, password, role } = req.body;
 
-  const existingUser = await User.findOne({
-    $or: [{ userEmail }, { userName }],
-  });
+    // Validate required fields
+    if (!userName || !userEmail || !password) {
+      console.log('Missing required fields');
+      return res.status(400).json({
+        success: false,
+        message: "Username, email, and password are required"
+      });
+    }
 
-  if (existingUser) {
-    return res.status(400).json({
+    console.log('Checking for existing user with:', { userName, userEmail });
+    const existingUser = await User.findOne({
+      $or: [{ userEmail }, { userName }],
+    });
+
+    if (existingUser) {
+      console.log('Found existing user:', existingUser.userEmail);
+      return res.status(400).json({
+        success: false,
+        message: "User name or user email already exists",
+      });
+    }
+
+    console.log('Creating new user...');
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      userName,
+      userEmail,
+      role: role || 'student', // Default to student if role not provided
+      password: hashPassword,
+    });
+
+    await newUser.save();
+    console.log('User saved successfully');
+
+    return res.status(201).json({
+      success: true,
+      message: "User registered successfully!",
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    return res.status(500).json({
       success: false,
-      message: "User name or user email already exists",
+      message: "Error registering user",
+      error: error.message
     });
   }
-
-  const hashPassword = await bcrypt.hash(password, 10);
-  const newUser = new User({
-    userName,
-    userEmail,
-    role,
-    password: hashPassword,
-  });
-
-  await newUser.save();
-
-  return res.status(201).json({
-    success: true,
-    message: "User registered successfully!",
-  });
 };
 
 const loginUser = async (req, res) => {
