@@ -22,7 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use((req, res, next) => {
-  const allowedOrigins = ['https://glowing-tulumba-c356a6.netlify.app', 'http://localhost:3002'];
+  const allowedOrigins = [
+    'https://enchanting-travesseiro-6e8c26.netlify.app',
+    'http://localhost:3002'
+  ];
   const origin = req.headers.origin;
   
   if (allowedOrigins.includes(origin)) {

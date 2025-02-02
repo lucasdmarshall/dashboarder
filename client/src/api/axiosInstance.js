@@ -8,17 +8,28 @@ const axiosInstance = axios.create({
   }
 });
 
+// Add request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = JSON.parse(sessionStorage.getItem("accessToken")) || "";
-
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    // Get token from localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
-
     return config;
   },
-  (err) => Promise.reject(err)
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('API Error:', error.response?.data || error.message);
+    return Promise.reject(error);
+  }
 );
 
 export default axiosInstance;
