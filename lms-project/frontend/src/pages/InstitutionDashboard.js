@@ -58,7 +58,8 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  VStack
 } from '@chakra-ui/react';
 import InstitutionSidebar from '../components/InstitutionSidebar';
 import { 
