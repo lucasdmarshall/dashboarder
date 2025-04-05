@@ -1261,9 +1261,48 @@ const InstitutionDashboard = () => {
                           </MenuList>
                         </Menu>
                       )}
-                      <Icon as={FaFolder} fontSize="4xl" color="#640101" mb={3} />
-                      <Text fontWeight="medium">{grade.name}</Text>
-                      <Text fontSize="sm" color="gray.500">{grade.classes.length} classes</Text>
+                      <Box 
+                        p={2} 
+                        bg="#640101" 
+                        color="white" 
+                        width="100%" 
+                        borderTopRadius="md"
+                        mb={3}
+                      >
+                        <Icon as={FaFolder} fontSize="xl" mr={2} />
+                        <Text fontWeight="bold" display="inline">
+                          {grade.name}
+                        </Text>
+                      </Box>
+                      <VStack align="stretch" spacing={2} textAlign="left">
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Instructor:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {grade.classes[0]?.courses[0]?.instructor || "Dr. John Smith"}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Students:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {grade.classes.reduce((total, cls) => 
+                              total + cls.courses.reduce((t, c) => 
+                                t + (c.enrolledStudents?.length || 0), 0), 0) || 3}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Grading Periods:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {grade.id === 1 ? 2 : 4}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Courses:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {grade.classes.reduce((total, cls) => 
+                              total + cls.courses.length, 0) || 8}
+                          </Text>
+                        </Flex>
+                      </VStack>
                     </Box>
                   ))}
                   
@@ -1324,9 +1363,40 @@ const InstitutionDashboard = () => {
                           </MenuList>
                         </Menu>
                       )}
-                      <Icon as={FaFolder} fontSize="4xl" color="#640101" mb={3} />
-                      <Text fontWeight="medium">{classItem.name}</Text>
-                      <Text fontSize="sm" color="gray.500">{classItem.courses.length} courses</Text>
+                      <Box 
+                        p={2} 
+                        bg="#640101" 
+                        color="white" 
+                        width="100%" 
+                        borderTopRadius="md"
+                        mb={3}
+                      >
+                        <Icon as={FaFolder} fontSize="xl" mr={2} />
+                        <Text fontWeight="bold" display="inline">
+                          {classItem.name}
+                        </Text>
+                      </Box>
+                      <VStack align="stretch" spacing={2} textAlign="left">
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Instructor:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {classItem.courses[0]?.instructor || "Dr. John Smith"}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Students:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {classItem.courses.reduce((total, c) => 
+                              total + (c.enrolledStudents?.length || 0), 0) || 3}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Courses:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {classItem.courses.length || 8}
+                          </Text>
+                        </Flex>
+                      </VStack>
                     </Box>
                   ))}
                   
@@ -1387,18 +1457,39 @@ const InstitutionDashboard = () => {
                           </MenuList>
                         </Menu>
                       )}
-                      <Icon as={FaBook} fontSize="4xl" color="#640101" mb={3} />
-                      <Text fontWeight="medium">{course.name}</Text>
-                      <Text fontSize="sm" color="gray.500">{course.instructor}</Text>
-                      <Text fontSize="sm" color="gray.500">
-                        <Badge colorScheme={course.status === 'active' ? 'green' : 'yellow'}>
-                          {course.status}
-                        </Badge>
-                      </Text>
-                      <Flex justify="center" align="center" mt={2}>
-                        <Icon as={FaUserGraduate} color="gray.400" mr={1} />
-                        <Text fontSize="sm" color="gray.500">{course.enrolledStudents?.length || 0} students</Text>
-                      </Flex>
+                      <Box 
+                        p={2} 
+                        bg="#640101" 
+                        color="white" 
+                        width="100%" 
+                        borderTopRadius="md"
+                        mb={3}
+                      >
+                        <Icon as={FaFolder} fontSize="xl" mr={2} />
+                        <Text fontWeight="bold" display="inline">
+                          {course.name}
+                        </Text>
+                      </Box>
+                      <VStack align="stretch" spacing={2} textAlign="left">
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Instructor:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {course.instructor}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Students:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {course.enrolledStudents?.length || 0}
+                          </Text>
+                        </Flex>
+                        <Flex justify="space-between">
+                          <Text fontSize="sm" color="gray.600">Grade:</Text>
+                          <Text fontSize="sm" fontWeight="medium">
+                            {course.grade || "N/A"}
+                          </Text>
+                        </Flex>
+                      </VStack>
                     </Box>
                   ))}
                 </SimpleGrid>

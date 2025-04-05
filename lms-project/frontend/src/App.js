@@ -77,6 +77,7 @@ import Attendance from './pages/Attendance';
 import ReportCard from './pages/ReportCard';
 import HomeworkSubmission from './pages/HomeworkSubmission';
 import TimeTable from './pages/TimeTable';
+import Institution from './pages/Institution';
 
 // Import Header
 import Header from './components/Header';
@@ -97,6 +98,7 @@ function App() {
                   <Route path="/instructor-dashboard" element={<InstructorDashboard />} />
                   <Route path="/admin-dashboard" element={<AdminDashboard />} />
                   <Route path="/institution-dashboard" element={<InstitutionDashboard />} />
+                  <Route path="/institution" element={<><InstitutionSidebar /><Institution /></>} />
                   <Route path="/instructor-registration" element={<InstructorRegistration />} />
                   <Route path="/student-registration" element={<StudentRegistration />} />
                   <Route path="/student-home" element={<StudentHome />} />
