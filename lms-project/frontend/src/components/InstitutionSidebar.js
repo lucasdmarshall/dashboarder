@@ -19,7 +19,8 @@ import {
   FaUserCheck,
   FaFileAlt,
   FaTasks,
-  FaClock
+  FaClock,
+  FaIdBadge
 } from 'react-icons/fa';
 
 const InstitutionSidebar = () => {
@@ -339,6 +340,22 @@ const InstitutionSidebar = () => {
         >
           <FaClock color="#640101" />
           <Text ml={2} color="gray.700">Time Table</Text>
+        </Flex>
+        
+        {/* Digital Hall Pass Section */}
+        <Flex 
+          as={RouterLink} 
+          to="/digital-hall-pass"
+          alignItems="center"
+          p={2}
+          borderRadius="md"
+          width="100%"
+          _hover={{ bg: 'rgba(100, 1, 1, 0.1)' }}
+          transition="all 0.2s"
+          mt={4}
+        >
+          <FaIdBadge color="#640101" />
+          <Text ml={2} color="gray.700">Digital Hall Pass</Text>
         </Flex>
       </VStack>
     </Box>
