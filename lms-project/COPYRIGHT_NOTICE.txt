@@ -19,7 +19,7 @@ This software and its associated documentation contain proprietary and confident
 Unauthorized use, reproduction, or distribution is strictly prohibited and may result in legal action.
 
 CONTACT FOR PERMISSIONS:
-- Email: legal@dashboarderlms.com
-- Address: [Your Company's Registered Address]
+- Email: support@dashboarder.org
+- Address: 1956, West 10th Street Brooklyn, New York
 
 REVISION DATE: 2025-02-21

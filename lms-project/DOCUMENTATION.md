@@ -215,9 +215,9 @@ python manage.py runserver
 
 ## 12. Contact and Support
 
-**Project Maintainer**: [Your Name/Team]
-**Email**: [contact@dashboarderlms.com]
-**Support**: [support@dashboarderlms.com]
+**Project Maintainer**: Dashboarder team
+**Email**: support@dashboarder.org
+**Support**: support@dashboarder.org
 
 ---
 
